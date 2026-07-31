@@ -1,0 +1,2 @@
+SELECT inst_id,sql_id,CHILD_NUMBER, EXECUTIONS,fetches,rows_processed, PARSE_CALLS, INVALIDATIONS, OBJECT_STATUS 
+FROM GV$SQL WHERE SQL_ID = '&sql_id';

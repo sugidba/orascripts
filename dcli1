@@ -1,0 +1,30 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]; then
+  echo "Usage: $0 \"command\""
+  exit 1
+fi
+
+CMD="$@"
+
+export ORAENV_ASK=NO
+ASM_SID=$(ps -ef | grep asm_pmon | grep -v grep | head -1 | awk -F_ '{print $3}')
+export ORACLE_SID=$ASM_SID
+. oraenv >/dev/null 2>&1
+
+for node in `olsnodes`
+do
+(
+  OUTPUT=$(/usr/bin/ssh -q \
+    -o ConnectTimeout=5 \
+    -o StrictHostKeyChecking=no \
+    -o BatchMode=yes \
+    $node "$CMD" 2>&1)
+
+  echo "===== $node ====="
+  echo "$OUTPUT"
+  echo
+) &
+done
+
+wait
