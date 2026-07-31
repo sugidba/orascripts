@@ -1,0 +1,11 @@
+undef sql_id
+undef inst_id
+undef sid
+undef table_name
+undef column_name
+undef col_name
+undef owner
+undef table_name
+undef partition_name
+undef segment_name
+undef segment_type
