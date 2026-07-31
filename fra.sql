@@ -1,0 +1,4 @@
+col NAME for a10
+set lines 200
+select name, SPACE_LIMIT/1024/1024/1024, SPACE_USED/1024/1024/1024, SPACE_RECLAIMABLE/1024/1024/1024, NUMBER_OF_FILES FROM V$RECOVERY_FILE_DEST;
+select * from v$flash_recovery_area_usage;
